@@ -1,5 +1,5 @@
 #include<stdio.h>
-# define MAX 9
+# define MAX 13
 
  
 void wall_off();
