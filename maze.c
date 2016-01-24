@@ -1,5 +1,5 @@
 #include<stdio.h>
-# define MAX 7
+# define MAX 11
  
 void wall_off();
 void print_maze();
