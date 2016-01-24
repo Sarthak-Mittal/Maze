@@ -1,5 +1,5 @@
 #include<stdio.h>
-# define MAX 11
+# define MAX 5
  
 void wall_off();
 void print_maze();
@@ -16,9 +16,21 @@ int status[4];
 
 int main()
 {
+int i,j;
 making_maze();
 wall_off();
 print_maze();
+set_status();
+
+	for(i = 1 ; i<MAX-1 ; i++)
+	{
+		for(j = 1 ; j<MAX-1 ; j++)
+			printf("%d.%d.%d.%d---",arr[i][j].status[0],arr[i][j].status[1],arr[i][j].status[2],arr[i][j].status[3]);
+		printf("\n\n\n");
+	}
+
+
+
 }
 
 void set_status()
@@ -29,15 +41,35 @@ int i,j;
 	{
 		for(j = 1 ; j<MAX-1 ; j=j+1)
 		{
-		   if(arr[i-1][j] == '#')
+//status for walled
+		   if(arr[i-1][j].img == '#')
+			arr[i][j].status[0] = 8;
+		   if(arr[i][j+1].img == '#')
 			arr[i][j].status[1] = 8;
-		   if(arr[i][j+1] == '#')
+		   if(arr[i+1][j].img == '#')
 			arr[i][j].status[2] = 8;
-		   if(arr[i+1][j] == '#')
+		   if(arr[i][j-1].img == '#')
 			arr[i][j].status[3] = 8;
-		   if(arr[i][j-1] == '#')
-			arr[i][j].status[4] = 8;
-		}	
+//status for undecided
+		   if(arr[i-1][j].img == '*')
+			arr[i][j].status[0] = 3;
+		   if(arr[i][j+1].img == '*')
+			arr[i][j].status[1] = 3;
+		   if(arr[i+1][j].img == '*')
+			arr[i][j].status[2] = 3;
+		   if(arr[i][j-1].img == '*')
+			arr[i][j].status[3] = 3;
+//status for path
+		   if(arr[i-1][j].img == '.')
+			arr[i][j].status[0] = 1;
+		   if(arr[i][j+1].img == '.')
+			arr[i][j].status[1] = 1;
+		   if(arr[i+1][j].img == '.')
+			arr[i][j].status[2] = 1;
+		   if(arr[i][j-1].img == '.')
+			arr[i][j].status[3] = 1;
+				
+}	
 
 	}
 
@@ -45,6 +77,8 @@ int i,j;
 
 
 // walled => 8
+// unddecided => 3
+// pathed => 1
 //  * 1 *
 //  4 - 2 
 //  * 3 *
