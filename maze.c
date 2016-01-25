@@ -1,10 +1,15 @@
 #include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+
 # define MAX 9
  
 void print_maze();
 void making_maze();
 void move_fwd(int x, int y);
+int random_array();
 
+int rand_arr[4];
 struct node{
 char img;
 int pre_x;
@@ -13,15 +18,31 @@ int status; // status = 1 is occupied and 0 is empty.
 }arr[MAX][MAX];
 
 
+int random_array()
+{
+srand(time(NULL));
+int r,i;
+r = rand()%4;
+for(i=0 ; i<4 ; i++)
+{
+rand_arr[i] 
+}
+
+}
+
+
 int main()
 {
+
 int i,j;
+
 making_maze();
 arr[2][2].img = '.';
 arr[2][2].status = 1;
-move_fwd(2,2);
-print_maze();
 
+//move_fwd(2,2);
+print_maze();
+  
 
 }
 void print_maze()
