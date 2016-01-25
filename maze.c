@@ -1,10 +1,11 @@
 #include<stdio.h>
-# define MAX 9
+# define MAX 13
  
 void wall_off();
 void print_maze();
 void making_maze();
-void set_status();
+//void set_status();
+void move_fwd(int x, int y);
 
 struct node{
 char img;
@@ -19,20 +20,21 @@ int main()
 int i,j;
 making_maze();
 wall_off();
+move_fwd(1,1);
 print_maze();
-set_status();
+//set_status();
 
-	for(i = 1 ; i<MAX-1 ; i++)
+/*	for(i = 1 ; i<MAX-1 ; i++)
 	{
 		for(j = 1 ; j<MAX-1 ; j++)
 			printf("%d.%d.%d.%d---",arr[i][j].status[0],arr[i][j].status[1],arr[i][j].status[2],arr[i][j].status[3]);
 		printf("\n\n\n");
 	}
-
+*/
 
 
 }
-
+/*
 void set_status()
 {
 int i,j;
@@ -69,7 +71,7 @@ int i,j;
 		   if(arr[i][j-1].img == '.')
 			arr[i][j].status[3] = 1;
 				
-}	
+		}	
 
 	}
 
@@ -83,7 +85,7 @@ int i,j;
 //  4 - 2 
 //  * 3 *
 
-
+*/
 void print_maze()
 {
 int i,j;
@@ -143,4 +145,62 @@ for(i = 1 ; i<MAX ; i=i+2)
 		arr[i][j].img = '.';
 }
 
+}
+
+void move_fwd(int x, int y)
+{
+// here random array function will be called
+// obtained array will be used in loop.
+
+int rand_arr[4];
+int i;
+
+for(i=0 ; i<4 ; i++)
+rand_arr[i] = i+1;
+
+for(i=0 ; i<4 ; i++)
+{
+switch(rand_arr[i])
+{
+
+case 1:
+
+	if(arr[x+1][y].img == '*')
+	{
+	arr[x+1][y].pre_x = x;
+	arr[x+1][y].pre_y = y;
+	arr[x+1][y].img = '.';
+	move_fwd(x+1,y);
+	}
+	break;
+case 2:
+	if(arr[x-1][y].img == '*')
+	{
+	arr[x-1][y].pre_x = x;
+	arr[x-1][y].pre_y = y;
+	arr[x-1][y].img = '.';
+	move_fwd(x-1,y);
+	}
+	break;
+case 3:
+	if(arr[x][y+1].img == '*')
+	{
+	arr[x][y+1].pre_x = x;
+	arr[x][y+1].pre_y = y;
+	arr[x][y+1].img = '.';
+	move_fwd(x,y+1);
+	}
+	break;
+case 4:
+	if(arr[x][y-1].img == '*')
+	{
+	arr[x][y-1].pre_x = x;
+	arr[x][y-1].pre_y = y;
+	arr[x][y-1].img = '.';
+	move_fwd(x,y-1);
+	}
+	break;
+
+}
+}
 }
