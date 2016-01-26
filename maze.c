@@ -1,15 +1,16 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<time.h>
+#include<unistd.h>
+#include "random.c"
 
 # define MAX 9
  
 void print_maze();
 void making_maze();
 void move_fwd(int x, int y);
-int random_array();
+//int random_array();
 
-int rand_arr[4];
 struct node{
 char img;
 int pre_x;
@@ -17,19 +18,36 @@ int pre_y;
 int status; // status = 1 is occupied and 0 is empty.
 }arr[MAX][MAX];
 
-
+/*
 int random_array()
 {
 srand(time(NULL));
-int r,i;
-r = rand()%4;
+int a,b,c,d;
+int i,j,temp;
+int arr[4];
 for(i=0 ; i<4 ; i++)
-{
-rand_arr[i] 
-}
+arr[i]=i+1;
 
-}
+a = rand()%2+1;
+b = rand()%2+2;
+c = rand()%2+1;
+d = rand()%2+2;
+printf("%d%d%d%d",a,b,c,d);
+for(i=a ; i<=b ; i++)
+ {
+  for(j=c ; j<=d ; j++)
+   {
+	temp = arr[i];
+	arr[i] = arr[j];
+	arr[j] = temp;
+   }
+ }
 
+for(i=0 ; i<4 ; i++)
+printf("%d",arr[i]);
+printf("\n");
+}
+*/
 
 int main()
 {
@@ -39,11 +57,8 @@ int i,j;
 making_maze();
 arr[2][2].img = '.';
 arr[2][2].status = 1;
-
-//move_fwd(2,2);
+move_fwd(2,2);
 print_maze();
-  
-
 }
 void print_maze()
 {
@@ -133,8 +148,19 @@ void move_fwd(int x, int y)
 {
 // here random array function will be called
 // obtained array will be used in loop.
+int i,*p;
+int ranArr[4];
 
-int rand_arr[4];// this array gives the direction to our current location.
+sleep(1.2);
+  p = rand_arr();
+	
+   for ( i = 0; i < 4; i++ ) 
+   {
+      ranArr[i] = *(p + i);  
+	printf("%d",*(p+i));
+   }
+
+// this array gives the direction to our current location.
 		/*
 		* 1 = top
 		* 2 = right
@@ -142,14 +168,13 @@ int rand_arr[4];// this array gives the direction to our current location.
 		* 4 = left
 		*/
 
-int i;
 
 //for(i=0 ; i<4 ; i++)
 //rand_arr[i] = i+1;
 
-for(i=4 ; i<5 ; i++)
+for(i=0 ; i<4 ; i++)
 {
-switch(i)
+switch(ranArr[i])
 {
 
 case 1:
@@ -237,3 +262,4 @@ print_maze();
 }
 }
 }
+
